@@ -1,0 +1,778 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrotoSafe - Tu Escudo de Seguridad en WhatsApp</title>
+    <link rel="icon" href="https://i.postimg.cc/6q61wC7h/Chat-GPT-Image-29-may-2025-02-13-14-p-m.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Generales */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #000; /* Fondo negro puro */
+            color: #e0e0e0; /* Color de texto claro */
+            line-height: 1.6;
+            overflow-x: hidden; /* Evita el scroll horizontal */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1, h2, h3 {
+            color: #8c52ff; /* Morado vibrante para títulos */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            font-weight: 600;
+            margin-top: 40px;
+            border-bottom: 2px solid #5a2e9e;
+            padding-bottom: 10px;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-top: 30px;
+            color: #00bcd4; /* Azul cian para subtítulos */
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        a {
+            color: #00bcd4;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #8c52ff;
+        }
+
+        /* Botones */
+        .btn {
+            display: inline-block;
+            background-color: #00bcd4;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 188, 212, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #8c52ff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(140, 82, 255, 0.4);
+        }
+
+        /* Header / Navegación */
+        header {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9); /* Fondo semi-transparente negro */
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #00bcd4;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: #8c52ff;
+            margin-left: 5px;
+        }
+
+        .logo img { /* Estilo para la imagen del logo */
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 5px; /* Pequeños bordes redondeados para el logo */
+            object-fit: contain; /* Asegura que la imagen se ajuste */
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links li a {
+            color: #e0e0e0;
+            font-weight: 400;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #8c52ff;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        /* Sección Hero (con Canvas) */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Ocupa toda la altura de la ventana */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+            padding-top: 80px; /* Espacio para el header fijo */
+            box-sizing: border-box;
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente para el texto */
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
+        }
+
+        .hero-content h1 {
+            font-size: 4em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(140, 82, 255, 0.7);
+            color: #e0e0e0; /* Blanco para el título principal */
+        }
+
+        .hero-content p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        /* Secciones de Contenido */
+        .content-section {
+            padding: 60px 20px;
+            background-color: #0d0d1a; /* Fondo ligeramente más claro para las secciones */
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .content-section:nth-child(even) {
+            background-color: #1a1a2e; /* Alternar colores de fondo */
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        /* Estilo para las tarjetas de servicio (ahora enlaces) */
+        .service-link {
+            display: block; /* Hace que toda la tarjeta sea clickable */
+            text-decoration: none; /* Elimina el subrayado por defecto */
+            color: inherit; /* Hereda el color del texto */
+            background-color: #2b2b4d;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #3a3a60;
+            height: 100%; /* Asegura que todas las tarjetas tengan la misma altura */
+            box-sizing: border-box;
+        }
+
+        .service-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+        }
+
+        .service-link h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #00bcd4;
+            text-align: left; /* Alinea el título a la izquierda dentro de la tarjeta */
+        }
+
+        .service-link p {
+            color: #e0e0e0;
+        }
+
+        .grid-item { /* Estilo general para items de la grilla que no son servicios */
+            background-color: #2b2b4d;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #3a3a60;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+        }
+
+        .grid-item h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #00bcd4;
+        }
+
+        .grid-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .grid-item ul li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .grid-item ul li::before {
+            content: '•';
+            color: #8c52ff;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Colaboradores */
+        .collaborator-card {
+            text-align: center;
+            background-color: #333355;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid #444477;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .collaborator-card img { /* Estilo para la imagen del colaborador */
+            width: 100px;
+            height: 100px;
+            border-radius: 50%; /* Circular */
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #00bcd4; /* Borde cian */
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+        }
+
+        .collaborator-card h4 {
+            color: #e0e0e0;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .collaborator-card p {
+            font-size: 0.95em;
+            color: #b0b0b0;
+        }
+
+        .collaborator-card .languages {
+            font-size: 0.85em;
+            font-style: italic;
+            color: #a0a0a0;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            background-color: #111122;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 40px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        .kofi-support {
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .kofi-support img {
+            width: 150px; /* Tamaño de la imagen de Ko-fi */
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .kofi-support img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Mensaje de carga del Canvas */
+        #canvas-loading-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px 30px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1001;
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.5);
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #00bcd4;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            .hero-content h1 {
+                font-size: 2.5em;
+            }
+            .hero-content p {
+                font-size: 1em;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            h3 {
+                font-size: 1.4em;
+            }
+            .content-section {
+                padding: 40px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="https://i.postimg.cc/6q61wC7h/Chat-GPT-Image-29-may-2025-02-13-14-p-m.png" alt="CrotoSafe Logo" onerror="this.onerror=null;this.src='https://placehold.co/30x30/000/ffffff?text=LogoFallback';">
+                Croto<span>Safe</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#presentacion">Presentación</a></li> <li><a href="#instalacion">Instalación</a></li>
+                <li><a href="#comandos">Comandos</a></li>
+                <li><a href="#colaboradores">Colaboradores</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero-section" id="inicio">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <h1>CrotoSafe: Tu Escudo Digital en WhatsApp</h1>
+            <p>Protege tus comunicaciones con la tecnología de seguridad más avanzada. Simple, potente y siempre un paso adelante.</p>
+            <a href="#instalacion" class="btn">¡Empieza Ahora!</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="content-section" id="presentacion">
+            <h2>Bienvenido a CrotoSafe</h2>
+            <p>En CrotoSafe, creemos que la seguridad digital debe ser accesible y efectiva para todos. Nos dedicamos a desarrollar herramientas innovadoras que te brindan el control total sobre tu privacidad y protección en plataformas como WhatsApp. Nuestro compromiso es con tu tranquilidad en el mundo digital.</p>
+            <p>Explora cómo CrotoSafe puede transformar tu experiencia de comunicación, ofreciéndote un escudo robusto contra amenazas y una gestión inteligente de tus interacciones.</p>
+        </section>
+
+        <section class="content-section" id="que-es">
+            <h2>¿Qué es CrotoSafe?</h2>
+            <p>CrotoSafe es un paquete de seguridad diseñado para brindarte un control y protección avanzados sobre tus interacciones en WhatsApp. Aunque actualmente requiere ser iniciado manualmente, nuestro equipo trabaja constantemente en mejoras, incluyendo un futuro alojamiento 24/7.</p>
+            <p>Nuestra misión es empoderarte con herramientas que te permitan navegar en el entorno digital de WhatsApp con confianza y tranquilidad.</p>
+        </section>
+
+        <section class="content-section" id="instalacion">
+            <h2>Instalación de CrotoSafe</h2>
+            <p>Comenzar a usar CrotoSafe es sencillo. Sigue estos pasos para integrar nuestro paquete de seguridad en tu sistema:</p>
+            <div class="section-grid">
+                <div class="grid-item">
+                    <h3>Paso 1: Instalación Global</h3>
+                    <p>Abre tu terminal y ejecuta el siguiente comando para instalar CrotoSafe globalmente en tu sistema:</p>
+                    <pre><code>npm install -g crotosafe</code></pre>
+                    <p>Esto asegura que CrotoSafe esté disponible desde cualquier directorio.</p>
+                </div>
+                <div class="grid-item">
+                    <h3>Paso 2: Iniciar CrotoSafe</h3>
+                    <p>Una vez instalado, puedes iniciar el servicio de CrotoSafe con un simple comando:</p>
+                    <pre><code>crotosafe</code></pre>
+                    <p>¡Y listo! CrotoSafe se activará y estará listo para proteger tus comunicaciones.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" id="comandos">
+            <h2>Comandos Disponibles</h2>
+            <p>CrotoSafe te ofrece una serie de comandos intuitivos para gestionar tu seguridad. Aquí te presentamos algunos de los más importantes:</p>
+            <div class="section-grid">
+                <div class="grid-item">
+                    <h3>Comandos Principales</h3>
+                    <ul>
+                        <li><code>HELP;</code>: Muestra una lista completa de todos los comandos disponibles y su uso.</li>
+                        <li><code>SHOW crotosafe;</code>: Accede a las estadísticas detalladas de CrotoSafe, incluyendo métricas de protección y actividad.</li>
+                        <li><code>ENABLE crotosafe;</code>: Activa o reactiva el servicio principal de CrotoSafe.</li>
+                    </ul>
+                    <p>Explora el menú de ayuda en tu terminal para descubrir más funcionalidades y comandos avanzados.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" id="colaboradores">
+            <h2>Nuestros Colaboradores</h2>
+            <p>CrotoSafe es el resultado del esfuerzo de un equipo de desarrolladores dedicados. Aunque no siempre están bajo los reflectores, su pasión y experiencia son el motor de este proyecto.</p>
+            <div class="section-grid">
+                <div class="collaborator-card">
+                    <img src="https://3up.kesug.com/uploads/img_683a13c4d916e.png" alt="Imagen de Source Developer" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a60/ffffff?text=User';">
+                    <h4>Source Developer</h4>
+                    <p>Programador con amplia experiencia en el desarrollo de aplicaciones robustas y eficientes.</p>
+                    <p class="languages">Lenguajes: JavaScript, Python, Go</p>
+                </div>
+                <div class="collaborator-card">
+                    <img src="https://3up.kesug.com/uploads/img_683a13fd7cd02.jpg" alt="Imagen de KaitoNeko" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a60/ffffff?text=User';">
+                    <h4>KaitoNeko</h4>
+                    <p>Experto en el desarrollo de sitios web, aplicaciones, foros y programas, con habilidades en hosting y bases de datos.</p>
+                    <p class="languages">Lenguajes: Python, JavaScript, MySQL, PHP, Go</p>
+                </div>
+                <div class="collaborator-card">
+                    <img src="https://3up.kesug.com/uploads/img_683a1425a827a.png" alt="Imagen de JJSnice Team" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a60/ffffff?text=User';">
+                    <h4>JJSnice (Team)</h4>
+                    <p>Un equipo especializado en la creación de herramientas de terceros y soluciones de seguridad innovadoras.</p>
+                    <p class="languages">Lenguajes: C#, JavaScript</p>
+                </div>
+                <div class="collaborator-card">
+                    <img src="https://3up.kesug.com/uploads/img_683a1468b1be6.jpg" alt="Imagen de Soblend Team" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a60/ffffff?text=User';">
+                    <h4>Soblend Team</h4>
+                    <p>Conocimiento profundo en desarrollo de bots, interfaces de terminal, diseño, plataformas y ciberseguridad.</p>
+                    <p class="languages">Experiencia en: Bots, Terminales, Diseño, Hacking, Publicaciones</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" id="servicios">
+            <h2>CrotoSafe Services y Más</h2>
+            <p>Más allá de la seguridad en WhatsApp, CrotoSafe es parte de un ecosistema de herramientas y servicios diseñados para la comunidad digital.</p>
+            <div class="section-grid">
+                <a href="https://crotosafesocial.kesug.com/index.php" target="_blank" class="service-link">
+                    <h3>CrotoSafeSocial</h3>
+                    <p>Aui podras compartir fotos ala gente y opinar.</p>
+                </a>
+                <a href="https://crotosafeforo.my-board.org/index.php" target="_blank" class="service-link">
+                    <h3>CrotoSafeForo</h3>
+                    <p>Aqui podras socializar, hablar, entre otras cosas.</p>
+                </a>
+                <a href="https://microbytex.neocities.org/404" target="_blank" class="service-link">
+                    <h3>CrotoSafeBot (Discord)</h3>
+                    <p>Un bot de Discord diseñado para la administración de servidores, completamente independiente de nuestro servicio de seguridad en WhatsApp. Potencia tu comunidad en Discord.</p>
+                </a>
+                <a href="https://crotosafeblogger.is-best.net/?i=1" target="_blank" class="service-link">
+                    <h3>CrotoSafeBlogger</h3>
+                    <p>¿Te apasiona escribir? Con CrotoSafeBlogger, puedes crear tu propio blog personal utilizando Markdown. ¡Solo frontend, para que tu creatividad vuele sin límites!</p>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Gracias por leer este documento. No olvides seguirnos y apoyarnos en nuestras redes sociales.</p>
+        <p>Visita <a href="https://github.com/soblend-terminal" target="_blank">soblend-terminal</a>, ¡un proyecto bastante interesante!</p>
+        <div class="kofi-support">
+            <a href="https://ko-fi.com/ondarion" target="_blank">
+                <img src="https://storage.ko-fi.com/cdn/support_me_sm.png" alt="Support Me on Ko-fi" onerror="this.onerror=null;this.src='https://placehold.co/150x50/000/ffffff?text=Ko-fi';">
+            </a>
+        </div>
+        <p>&copy; <?php echo date("Y"); ?> CrotoSafe Team ®. Todos los derechos reservados. ❤️</p>
+    </footer>
+
+    <div id="canvas-loading-message">
+        <div class="spinner"></div>
+        Cargando animación de seguridad...
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // =====================================================================
+        // JavaScript - LÓGICA DEL CANVAS Y EFECTOS VISUALES
+        // =====================================================================
+
+        // Variables globales para la escena 3D
+        let scene, camera, renderer;
+        let particles = [];
+        let connections = [];
+        const numParticles = 100;
+        const connectionDistance = 2.5; // Distancia máxima para conectar partículas
+        const particleSpeed = 0.005;
+
+        // Elementos DOM
+        const canvas = document.getElementById('hero-canvas');
+        const loadingMessage = document.getElementById('canvas-loading-message');
+
+        // Función para inicializar la escena 3D
+        function initCanvas() {
+            // Crear una escena
+            scene = new THREE.Scene();
+
+            // Crear una cámara
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 10; // Posicionar la cámara
+
+            // Crear un renderizador WebGL
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // --- Partículas (nodos de la red de seguridad) ---
+            const particleGeometry = new THREE.SphereGeometry(0.1, 8, 8); // Esferas pequeñas
+            const particleMaterial = new THREE.MeshBasicMaterial({ color: 0x00bcd4 }); // Cian brillante
+
+            for (let i = 0; i < numParticles; i++) {
+                const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+                // Posicionar partículas aleatoriamente en un cubo
+                particle.position.x = (Math.random() - 0.5) * 20;
+                particle.position.y = (Math.random() - 0.5) * 20;
+                particle.position.z = (Math.random() - 0.5) * 20;
+                particle.userData.velocity = new THREE.Vector3(
+                    (Math.random() - 0.5) * particleSpeed,
+                    (Math.random() - 0.5) * particleSpeed,
+                    (Math.random() - 0.5) * particleSpeed
+                );
+                particles.push(particle);
+                scene.add(particle);
+            }
+
+            // --- Líneas de conexión ---
+            // No es necesario crear un material de línea aquí, se crea en el bucle de animación para la opacidad dinámica.
+
+            // Añadir luces (opcional, para MeshBasicMaterial no es estrictamente necesario pero si cambiamos el material)
+            const ambientLight = new THREE.AmbientLight(0x404040);
+            scene.add(ambientLight);
+
+            // Escuchadores de eventos para responsividad
+            window.addEventListener('resize', onWindowResize, false);
+
+            // Ocultar mensaje de carga
+            loadingMessage.style.display = 'none';
+            animateCanvas(); // Iniciar el bucle de animación
+        }
+
+        // Función para manejar el redimensionamiento de la ventana
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // Bucle de animación del Canvas
+        function animateCanvas() {
+            requestAnimationFrame(animateCanvas);
+
+            // Mover partículas y rebotar en los límites
+            particles.forEach(p => {
+                p.position.add(p.userData.velocity);
+
+                if (p.position.x > 10 || p.position.x < -10) p.userData.velocity.x *= -1;
+                if (p.position.y > 10 || p.position.y < -10) p.userData.velocity.y *= -1;
+                if (p.position.z > 10 || p.position.z < -10) p.userData.velocity.z *= -1;
+            });
+
+            // Actualizar conexiones entre partículas
+            // Eliminar conexiones antiguas
+            connections.forEach(line => scene.remove(line));
+            connections = [];
+
+            for (let i = 0; i < numParticles; i++) {
+                for (let j = i + 1; j < numParticles; j++) {
+                    const p1 = particles[i];
+                    const p2 = particles[j];
+                    const distance = p1.position.distanceTo(p2.position);
+
+                    if (distance < connectionDistance) {
+                        const opacity = (1 - (distance / connectionDistance)) * 0.5; // La opacidad disminuye con la distancia
+                        const lineMaterial = new THREE.LineBasicMaterial({ color: 0x8c52ff, transparent: true, opacity: opacity });
+                        const points = [p1.position, p2.position];
+                        const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                        const line = new THREE.Line(geometry, lineMaterial);
+                        scene.add(line);
+                        connections.push(line);
+                    }
+                }
+            }
+
+            // Rotar la cámara para un efecto dinámico
+            camera.rotation.y += 0.0005;
+            camera.rotation.x += 0.0002;
+
+            renderer.render(scene, camera);
+        }
+
+        // Iniciar el Canvas cuando la ventana esté completamente cargada
+        window.onload = function() {
+            initCanvas();
+        };
+
+        // =====================================================================
+        // JavaScript - LÓGICA DE SCROLL SUAVE PARA LA NAVEGACIÓN
+        // =====================================================================
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70, // Ajusta para el header fijo
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+    </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
