@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrotoSafe Documentación</title
+    <link rel="icon" href="https://i.postimg.cc/6q61wC7h/Chat-GPT-Image-29-may-2025-02-13-14-p-m.png">
+    <style>
+        :root {
+            --primary-color: #cb3837;
+            --sidebar-width: 240px;
+            --header-height: 60px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: #fff;
+            border-right: 1px solid #e5e5e5;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #e5e5e5;
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-header h2 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li a {
+            display: block;
+            padding: 10px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu li a:hover {
+            background-color: #f5f5f5;
+            color: var(--primary-color);
+        }
+        
+        .sidebar-menu li a.active {
+            background-color: #f5f5f5;
+            color: var(--primary-color);
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 20px 40px;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e5e5;
+            margin-bottom: 30px;
+        }
+        
+        .header-title h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+        }
+        
+        .header-icon img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        /* Content */
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .section h3 {
+            margin: 20px 0 10px;
+            color: #555;
+        }
+        
+        .section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        /* Code blocks */
+        pre {
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #333;
+        }
+        
+        /* Contributors */
+        .contributors {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .contributor {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: calc(50% - 20px);
+        }
+        
+        .contributor h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e5e5;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* Ko-fi button */
+        .kofi-button {
+            display: inline-block;
+            background-color: #29abe0;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .kofi-button:hover {
+            background-color: #1e8fc7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+            
+            .contributor {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>CrotoSafe Docs</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#introduction" class="active">Introducción</a></li>
+            <li><a href="#installation">Instalación</a></li>
+            <li><a href="#commands">Comandos</a></li>
+            <li><a href="#contributors">Colaboradores</a></li>
+            <li><a href="#website">Sitio Web</a></li>
+            <li><a href="#services">Servicios</a></li>
+        </ul>
+        <a href="https://ko-fi.com/" target="_blank" class="kofi-button" style="margin: 20px;">Support me on Ko-fi</a>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="header">
+            <div class="header-title">
+                <h1>CrotoSafe Documentos</h1>
+            </div>
+            <div class="header-icon">
+                <!-- Cambia la ruta por tu imagen -->
+                <img src="https://i.postimg.cc/6q61wC7h/Chat-GPT-Image-29-may-2025-02-13-14-p-m.png" alt="CrotoSafe Icon">
+            </div>
+        </div>
+        
+        <div class="content">
+            <section id="introduction" class="section">
+                <p>Aquí encontraras toda la información sobre CrotoSafe que posiblemente te resultará util.</p>
+            </section>
+            
+            <section id="installation" class="section">
+                <h2>Instalación de CrotoSafe</h2>
+                <p>Lo primero que debes tener en cuenta, esque este paquete no cuenta con un alojamiento 24/7 por lo tanto si se cierra se desactivará, pero uno de los próximos objetivos para la actualización es ese.</p>
+                
+                <h3>Paso 1</h3>
+                <p>Instala CrotoSafe globalmente</p>
+                <pre><code>npm install -g crotosafe</code></pre>
+                
+                <h3>Paso 2</h3>
+                <p>Inicia CrotoSafe</p>
+                <pre><code>crotosafe</code></pre>
+                <p>Y se iniciará el CrotoSafe.</p>
+            </section>
+            
+            <section id="commands" class="section">
+                <h2>Comandos Disponibles</h2>
+                <p>A continuación te daré los comandos que están disponibles actualmente.</p>
+                
+                <ul>
+                    <li><strong>HELP;</strong> >> Mira la lista de comandos</li>
+                    <li><strong>SHOW crotosafe;</strong> >> Mira las estadísticas</li>
+                    <li><strong>ENABLE crotosafe;</strong> >> Activa CrotoSafe</li>
+                </ul>
+                
+                <p>Estos son los comandos para CrotoSafe posiblemente haigan más en el menu de ayuda desde tu terminal.</p>
+            </section>
+            
+            <section id="contributors" class="section">
+                <h2>Colaboradores</h2>
+                <p>Este proyecto cuenta con algunos colaboradores no muy reconocídos pero podríamos decir que hacemos lo mejor posible.</p>
+                
+                <div class="contributors">
+                    <div class="contributor">
+                        <h4>Source Developer</h4>
+                        <p>Programador con experiencia en hacer aplicaciones.</p>
+                        <p><strong>Lenguajes:</strong> JavaScript, Python, Go</p>
+                    </div>
+                    
+                    <div class="contributor">
+                        <h4>KaitoNeko</h4>
+                        <p>Programador con experiencias en sitios web, aplicaciones, foros, programas y hostings.</p>
+                        <p><strong>Lenguajes:</strong> Python, JavaScript, MySQL, PHP, Go.</p>
+                    </div>
+                    
+                    <div class="contributor">
+                        <h4>JJSnice</h4>
+                        <p>Este no es una persona, es un Team, los miembros tienen conocimiento en hacer herramientas como de terceros y de seguridad.</p>
+                        <p><strong>Lenguajes:</strong> C#, JavaScript.</p>
+                    </div>
+                    
+                    <div class="contributor">
+                        <h4>Soblend Team</h4>
+                        <p>Experiencia en hacer bots, terminales, diseño, plataformas, hacking y publicaciones.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="website" class="section">
+                <h2>Sitio Web</h2>
+                <p>El sitio web de CrotoSafe que se encuentra registrado en GitHub contiene varias cosas, pero principalmente hay una página inicial en dónde podrás ver la Documentación, Cosas básicas, etc.</p>
+            </section>
+            
+            <section id="services" class="section">
+                <h2>CrotoSafeServices</h2>
+                <p>Este se encuentra en el sitio web, ofrece diferentes servicios como Storage, Novedades, Bots, entre otras cosas.</p>
+                
+                <h3>CrotoSafeNews</h3>
+                <p>Aquí podrás ver las novedades y noticias que te gusten, este puede tardar un poco en cargar.</p>
+                
+                <h3>CrotoSafeBot</h3>
+                <p>Este es un bot de discord que no está relacionado con el servicio de seguridad en WhatsApp, sino con la administración de servidores en discord.</p>
+                
+                <h3>CrotoSafeBlogger</h3>
+                <p>Este es un servicio que te ofrece crear un Blog con Markdown (Solo se acepta fronted).</p>
+            </section>
+            
+            <div class="footer">
+                <p>Gracias por leer este documento, y no olvides seguirnos y apoyarnos en nuestras redes sociales, y visita soblend-terminal es un proyecto bastante interesante.</p>
+                <p>By CrotoSafe Team ®. All rights reserved. ♥️</p>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.sidebar-menu li a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Scroll to section
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Highlight current section in sidebar
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.section');
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= (sectionTop - 100)) {
+                    currentSection = '#' + section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('.sidebar-menu li a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+          </html>
